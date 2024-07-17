@@ -1,6 +1,32 @@
 import http from 'k6/http';
-import {check} from 'k6';
+import { check } from 'k6';
 
+export const options = {
+    stages: [
+        {
+            duration: '10s',
+            target: 10
+        },
+        {
+            duration: '60s',
+            target: 10
+        },
+        {
+            duration: '10s',
+            target: 0
+        }
+    ],
+    thresholds: {
+        http_req_duration: ['p(90)<1250', 'p(95)<1300'],
+        checks: ['rate>=0.99'],
+    },
+    ext: {
+        loadimpact: {
+            ProjectID: 3705299
+        }
+    }
+
+}
 export default function () {
     const body = JSON.stringify({
         'username': 'k6TestShivam1721041771760',
@@ -47,12 +73,12 @@ export default function () {
             }
         }
     )
-    check(newResponse,{
-        'status is 200': (r)=> r.status === 200,
-        'crocodile id is ': (r)=> newResponse.json().id === crocodileId
+    check(newResponse, {
+        'status is 200': (r) => r.status === 200,
+        'crocodile id is ': (r) => newResponse.json().id === crocodileId
     })
 
-    
+
     // console.log(newResponse);
 
 }
