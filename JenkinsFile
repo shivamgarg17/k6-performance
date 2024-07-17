@@ -7,7 +7,7 @@ pipeline {
                 sh 'chmod +x setup_k6.sh'
                 sh ' ./setup_k6.sh'
                 echo 'Running K6 performance tests...'
-                sh 'k6 run loadtests/performance-test.js'
+                sh 'k6 run K6Graffana/LoginAPI.js'
             }
         }
     }
