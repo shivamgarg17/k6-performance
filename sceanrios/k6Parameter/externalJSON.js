@@ -8,9 +8,14 @@ const sharedArray = new SharedArray('User Registration', function () {
 });
 console.log(sharedArray);
 
-// export const options={
+export const options={
+    vus:5,
+    duration: '30s',
 
-// }
+    cloud:{
+        ProjectID:3705299
+    }
+}
 export default function () {
 
     sharedArray.forEach((item) => {
@@ -32,3 +37,5 @@ export default function () {
 }
 
 //k6 login cloud --token 6c00f1aefcd9653840f259376b3356a6e8515196f33372c6ecbc8d05a166416d
+
+// run script locall and export result to cloud: k6 run <scriptname> -o cloud
